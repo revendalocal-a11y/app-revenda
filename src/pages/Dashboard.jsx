@@ -53,7 +53,6 @@ const Dashboard = () => {
             })
 
             // 4. Products & Clients Analysis
-            // Fetch all orders with items for detailed analysis
             const { data: ordersDetails } = await supabase
                 .from('pedidos')
                 .select(`
@@ -89,7 +88,7 @@ const Dashboard = () => {
                 .slice(0, 5)
                 .map(([name, total]) => ({ name, total }))
 
-            // Inactive Clients (No purchase in last 30 days)
+            // Inactive Clients
             const { data: allClients } = await supabase.from('clientes').select('id, nome, telefone')
             const thirtyDaysAgo = subDays(new Date(), 30)
 
@@ -101,7 +100,7 @@ const Dashboard = () => {
 
             const inactiveClients = allClients
                 .filter(c => !activeClientIds.has(c.id))
-                .slice(0, 5) // Show top 5 inactive
+                .slice(0, 5)
 
             setStats({
                 totalClients: clientsCount || 0,
@@ -131,7 +130,8 @@ const Dashboard = () => {
                 color: color,
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                flexShrink: 0
             }}>
                 <Icon size={30} />
             </div>
@@ -147,10 +147,15 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h1 className="text-gradient" style={{ marginBottom: '30px' }}>Dashboard</h1>
+            {/* Updated Title */}
+            <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+                <h1 className="text-gradient" style={{ margin: 0, fontSize: '2rem' }}>REVENDA LOCAL</h1>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>Gerenciamento da revenda local</p>
+            </div>
 
             {loading ? <p>Carregando dados...</p> : (
                 <>
+                    {/* Top Stats - Responsive Grid */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '30px' }}>
                         <StatCard
                             title="Clientes Totais"
@@ -179,8 +184,11 @@ const Dashboard = () => {
                         />
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px', marginBottom: '30px' }}>
-                        <div className="glass-panel" style={{ padding: '24px', minHeight: '400px' }}>
+                    {/* Analysis Grid - Flattened structure to allow mobile reordering */}
+                    <div className="dashboard-analysis-grid">
+
+                        {/* Weekly Revenue (Chart) */}
+                        <div className="analysis-chart glass-panel" style={{ padding: '24px', minHeight: '400px' }}>
                             <h3 style={{ marginBottom: '20px' }}>Faturamento Semanal</h3>
                             <ResponsiveContainer width="100%" height={300}>
                                 <BarChart data={stats.weeklyRevenue}>
@@ -196,8 +204,9 @@ const Dashboard = () => {
                             </ResponsiveContainer>
                         </div>
 
-                        <div className="glass-panel" style={{ padding: '24px' }}>
-                            <h3 style={{ marginBottom: '20px' }}>Top Produtos</h3>
+                        {/* Top Products */}
+                        <div className="analysis-products glass-panel" style={{ padding: '24px' }}>
+                            <h3 style={{ marginBottom: '20px' }}>Produtos Principais</h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                                 {stats.topProducts.map((p, idx) => (
                                     <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
@@ -210,10 +219,9 @@ const Dashboard = () => {
                                 {stats.topProducts.length === 0 && <p className="text-muted">Sem dados ainda.</p>}
                             </div>
                         </div>
-                    </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                        <div className="glass-panel" style={{ padding: '24px' }}>
+                        {/* Best Clients */}
+                        <div className="analysis-best glass-panel" style={{ padding: '24px' }}>
                             <h3 style={{ marginBottom: '20px' }}>Melhores Clientes</h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                                 {stats.topClients.map((c, idx) => (
@@ -222,29 +230,31 @@ const Dashboard = () => {
                                             <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: '#3498db20', color: '#3498db', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                 {idx + 1}
                                             </div>
-                                            <span>{c.name}</span>
+                                            <span style={{ fontSize: '0.9rem' }}>{c.name}</span>
                                         </div>
-                                        <span style={{ fontWeight: 'bold' }}>{formatCurrency(c.total)}</span>
+                                        <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{formatCurrency(c.total)}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        <div className="glass-panel" style={{ padding: '24px' }}>
+                        {/* Inactive Clients */}
+                        <div className="analysis-inactive glass-panel" style={{ padding: '24px' }}>
                             <h3 style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                 <AlertCircle color="#F87171" size={20} />
-                                Clientes Inativos (30 dias)
+                                Clientes Inativos
                             </h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                                 {stats.inactiveClients.map((c, idx) => (
                                     <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <span>{c.name}</span>
-                                        <span style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>{c.telefone || 'Sem telefone'}</span>
+                                        <span style={{ fontSize: '0.9rem' }}>{c.name}</span>
+                                        <span style={{ color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>{c.telefone || 'Sem telefone'}</span>
                                     </div>
                                 ))}
-                                {stats.inactiveClients.length === 0 && <p style={{ color: 'var(--color-text-muted)' }}>Todos os clientes estão ativos!</p>}
+                                {stats.inactiveClients.length === 0 && <p style={{ color: 'var(--color-text-muted)' }}>Todos ativos!</p>}
                             </div>
                         </div>
+
                     </div>
                 </>
             )}

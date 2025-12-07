@@ -14,31 +14,33 @@ const Modal = ({ isOpen, onClose, title, children, zIndex = 1100 }) => {
             backgroundColor: 'rgba(5, 12, 28, 0.85)',
             backdropFilter: 'blur(4px)',
             display: 'flex',
-            alignItems: 'center', // Center vertically
-            justifyContent: 'center', // Center horizontally
+            alignItems: 'center',
+            justifyContent: 'center',
             zIndex: zIndex,
-            padding: '20px'
+            padding: '10px' // Reduced padding for mobile
         }}>
             <div className="glass-panel animate-fade-in" style={{
                 width: '100%',
-                maxWidth: '600px', // Slight increase for better spacing
+                maxWidth: '600px',
                 background: '#0A1A3A',
-                maxHeight: '90vh', // Ensure it doesn't overflow screen vertically
-                overflowY: 'auto',
+                maxHeight: '90vh',
                 display: 'flex',
                 flexDirection: 'column',
-                position: 'relative'
+                position: 'relative',
+                borderRadius: '16px',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             }}>
                 <div style={{
-                    padding: '20px 24px',
+                    padding: '16px 20px',
                     borderBottom: '1px solid var(--border-color)',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    position: 'sticky',
-                    top: 0,
                     background: '#0A1A3A',
-                    zIndex: 10
+                    borderTopLeftRadius: '16px',
+                    borderTopRightRadius: '16px',
+                    zIndex: 10,
+                    flexShrink: 0
                 }}>
                     <h3 style={{ margin: 0, color: 'white', fontSize: '1.25rem' }}>{title}</h3>
                     <button
@@ -48,13 +50,21 @@ const Modal = ({ isOpen, onClose, title, children, zIndex = 1100 }) => {
                             border: 'none',
                             color: 'var(--color-text-muted)',
                             cursor: 'pointer',
-                            padding: '5px'
+                            padding: '5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
                         }}
                     >
                         <X size={24} />
                     </button>
                 </div>
-                <div style={{ padding: '24px' }}>
+
+                <div style={{
+                    padding: '20px',
+                    overflowY: 'auto',
+                    overscrollBehavior: 'contain'
+                }}>
                     {children}
                 </div>
             </div>

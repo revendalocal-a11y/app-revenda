@@ -260,9 +260,31 @@ label {
   left: 0;
   z-index: 1100;
   transition: transform 0.3s ease;
-  /* Glass effect already in glass-panel, but maybe ensure bg strength */
   background: rgba(5, 12, 28, 0.95) !important;
   border-right: 1px solid var(--border-color);
+}
+
+/* Dashboard Analysis Grid Layout (Desktop Default) */
+.dashboard-analysis-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.analysis-chart {
+  grid-column: span 8;
+}
+
+.analysis-products {
+  grid-column: span 4;
+}
+
+.analysis-best {
+  grid-column: span 6;
+}
+
+.analysis-inactive {
+  grid-column: span 6;
 }
 
 /* --- MEDIA QUERIES --- */
@@ -330,9 +352,44 @@ label {
     margin-bottom: 15px;
   }
 
-  /* Ensure tables don't break layout */
   .table-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Mobile Dashboard Layout overrides */
+  /* 
+       Row 1: Chart (Full)
+       Row 2: Best | Inactive (Side by side)
+       Row 3: Products (Full)
+    */
+  .dashboard-analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2 Columns */
+  }
+
+  .analysis-chart {
+    grid-column: 1 / -1;
+    /* Full Width */
+    order: 1;
+  }
+
+  .analysis-best {
+    grid-column: span 1;
+    /* Half Width */
+    order: 2;
+  }
+
+  .analysis-inactive {
+    grid-column: span 1;
+    /* Half Width */
+    order: 2;
+  }
+
+  .analysis-products {
+    grid-column: 1 / -1;
+    /* Full Width */
+    order: 3;
   }
 }

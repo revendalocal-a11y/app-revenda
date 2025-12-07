@@ -8,8 +8,8 @@ const Layout = () => {
 
     return (
         <div style={{ display: 'flex', minHeight: '100vh', position: 'relative' }}>
-            {/* Hamburger Button for Mobile */}
-            <div className="mobile-only" style={{ position: 'fixed', top: '15px', right: '15px', zIndex: 2000 }}>
+            {/* Hamburger Button for Mobile - Moved to TOP LEFT */}
+            <div className="mobile-only" style={{ position: 'fixed', top: '15px', left: '15px', zIndex: 2000 }}>
                 <button
                     onClick={() => setSidebarOpen(!sidebarOpen)}
                     className="glass-panel"
@@ -39,7 +39,8 @@ const Layout = () => {
                 minHeight: '100vh',
                 transition: 'margin-left 0.3s ease, width 0.3s ease'
             }}>
-                <div className="animate-fade-in" style={{ maxWidth: '1200px', margin: '0 auto', paddingTop: '20px' }}>
+                {/* Added top padding on mobile to account for hamburger */}
+                <div className="animate-fade-in" style={{ maxWidth: '1200px', margin: '0 auto', paddingTop: '40px' }}>
                     <Outlet />
                 </div>
             </main>
