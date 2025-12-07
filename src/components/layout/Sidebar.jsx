@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import {
     LayoutDashboard,
@@ -9,12 +9,21 @@ import {
     Kanban,
     FileText,
     LogOut,
-    TrendingDown
+    TrendingDown,
+    X
 } from 'lucide-react'
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
     const { signOut } = useAuth()
     const navigate = useNavigate()
+    const location = useLocation()
+
+    // Auto-close sidebar on route change for mobile users
+    useEffect(() => {
+        if (window.innerWidth < 1024 && onClose) {
+            onClose()
+        }
+    }, [location])
 
     const handleLogout = async () => {
         try {
@@ -36,17 +45,24 @@ const Sidebar = () => {
     ]
 
     return (
-        <aside className="sidebar glass-panel" style={{
-            width: '260px',
-            height: 'calc(100vh - 40px)',
-            margin: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '30px 20px',
-            position: 'fixed'
-        }}>
-            <div style={{ marginBottom: '40px', paddingLeft: '10px' }}>
+        <aside
+            className={`sidebar glass-panel ${isOpen ? 'mobile-open' : ''}`}
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '30px 20px',
+                // other styles are handled by CSS class .sidebar
+            }}
+        >
+            <div style={{ marginBottom: '40px', paddingLeft: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h1 style={{ fontSize: '1.5rem', margin: 0 }} className="text-gradient">RevendaLocal</h1>
+                <button
+                    className="mobile-only"
+                    onClick={onClose}
+                    style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}
+                >
+                    <X size={24} />
+                </button>
             </div>
 
             <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>

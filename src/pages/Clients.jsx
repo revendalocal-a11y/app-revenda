@@ -110,7 +110,7 @@ const Clients = () => {
 
             <div className="glass-panel" style={{ padding: '20px', marginBottom: '20px' }}>
                 <div style={{ position: 'relative' }}>
-                    <Search size={20} style={{ position: 'absolute', left: '12px', top: '80px', color: 'var(--color-text-muted)' }} />
+                    <Search size={20} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)', pointerEvents: 'none' }} />
                     <input
                         type="text"
                         placeholder="Buscar clientes por nome ou email..."
@@ -163,7 +163,7 @@ const Clients = () => {
                         <label>Nome *</label>
                         <input required value={formData.nome} onChange={e => setFormData({ ...formData, nome: e.target.value })} />
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                    <div className="grid-2">
                         <div>
                             <label>Telefone</label>
                             <input value={formData.telefone} onChange={e => setFormData({ ...formData, telefone: e.target.value })} />
@@ -173,7 +173,7 @@ const Clients = () => {
                             <input type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
                         </div>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '15px' }}>
+                    <div className="grid-3">
                         <div>
                             <label>Rua</label>
                             <input value={formData.rua} onChange={e => setFormData({ ...formData, rua: e.target.value })} />
@@ -183,7 +183,7 @@ const Clients = () => {
                             <input value={formData.numero} onChange={e => setFormData({ ...formData, numero: e.target.value })} />
                         </div>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                    <div className="grid-2">
                         <div>
                             <label>Bairro</label>
                             <input value={formData.bairro} onChange={e => setFormData({ ...formData, bairro: e.target.value })} />

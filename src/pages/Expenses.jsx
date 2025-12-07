@@ -209,7 +209,7 @@ const Expenses = () => {
                         <input required value={formData.nome} onChange={e => setFormData({ ...formData, nome: e.target.value })} placeholder="Ex: Conta de Luz" />
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                    <div className="grid-2">
                         <div>
                             <label>Valor (R$) *</label>
                             <div style={{ position: 'relative' }}>

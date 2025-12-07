@@ -115,7 +115,7 @@ const Products = () => {
 
             <div className="glass-panel" style={{ padding: '20px', marginBottom: '20px' }}>
                 <div style={{ position: 'relative' }}>
-                    <Search size={20} style={{ position: 'absolute', left: '12px', top: '80px', color: 'var(--color-text-muted)' }} />
+                    <Search size={20} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)', pointerEvents: 'none' }} />
                     <input
                         type="text"
                         placeholder="Buscar produtos..."
@@ -181,7 +181,7 @@ const Products = () => {
                         <label>Nome do Produto *</label>
                         <input required value={formData.nome} onChange={e => setFormData({ ...formData, nome: e.target.value })} />
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                    <div className="grid-2">
                         <div>
                             <label>Categoria</label>
                             <input
@@ -199,7 +199,7 @@ const Products = () => {
                             <input type="number" value={formData.estoque} onChange={e => setFormData({ ...formData, estoque: e.target.value })} />
                         </div>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                    <div className="grid-2">
                         <div>
                             <label>Preço de Custo (R$)</label>
                             <input type="number" step="0.01" value={formData.preco_custo} onChange={e => setFormData({ ...formData, preco_custo: e.target.value })} />

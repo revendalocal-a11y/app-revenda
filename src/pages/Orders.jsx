@@ -503,7 +503,7 @@ const Orders = () => {
                         <label>Nome *</label>
                         <input required value={clientFormData.nome} onChange={e => setClientFormData({ ...clientFormData, nome: e.target.value })} />
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                    <div className="grid-2">
                         <div>
                             <label>Telefone</label>
                             <input value={clientFormData.telefone} onChange={e => setClientFormData({ ...clientFormData, telefone: e.target.value })} />
@@ -513,7 +513,7 @@ const Orders = () => {
                             <input type="email" value={clientFormData.email} onChange={e => setClientFormData({ ...clientFormData, email: e.target.value })} />
                         </div>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '15px' }}>
+                    <div className="grid-3">
                         <div>
                             <label>Rua</label>
                             <input value={clientFormData.rua} onChange={e => setClientFormData({ ...clientFormData, rua: e.target.value })} />
@@ -523,7 +523,7 @@ const Orders = () => {
                             <input value={clientFormData.numero} onChange={e => setClientFormData({ ...clientFormData, numero: e.target.value })} />
                         </div>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                    <div className="grid-2">
                         <div>
                             <label>Bairro</label>
                             <input value={clientFormData.bairro} onChange={e => setClientFormData({ ...clientFormData, bairro: e.target.value })} />
