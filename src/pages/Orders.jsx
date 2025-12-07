@@ -496,7 +496,7 @@ const Orders = () => {
                 isOpen={isClientModalOpen}
                 onClose={() => setIsClientModalOpen(false)}
                 title="Novo Cliente"
-                zIndex={1001}
+                zIndex={1200}
             >
                 <form onSubmit={handleSaveClient} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                     <div>

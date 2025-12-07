@@ -357,12 +357,6 @@ label {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Mobile Dashboard Layout overrides */
-  /* 
-       Row 1: Chart (Full)
-       Row 2: Best | Inactive (Side by side)
-       Row 3: Products (Full)
-    */
   .dashboard-analysis-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
