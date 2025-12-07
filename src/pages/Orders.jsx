@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
-import { Plus, Search, FileText, ShoppingCart, Truck, CheckCircle, Eye } from 'lucide-react'
+import { Plus, Search, FileText } from 'lucide-react'
 import Modal from '../components/ui/Modal'
 import jsPDF from 'jspdf'
 import { format } from 'date-fns'
