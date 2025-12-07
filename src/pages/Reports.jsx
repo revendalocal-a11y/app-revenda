@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
 import { format, subDays, startOfDay } from 'date-fns'
-import { Printer, Package, TrendingUp, TrendingDown, PieChart, Users, AlertCircle, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import { Printer, Package, TrendingUp, TrendingDown, PieChart, Users, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react'
 import jsPDF from 'jspdf'
 
 const Reports = () => {
@@ -467,7 +467,7 @@ const Reports = () => {
                     <div style={{ padding: '32px' }}>
                         {/* Products Report */}
                         {activeTab === 'products' && (
-                            <div>
+                            <div className="animate-fade-in">
                                 <h3 style={{ fontSize: '1.25rem', marginBottom: '24px' }}>Produtos Mais Vendidos</h3>
                                 <div style={{ overflowX: 'auto', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -499,7 +499,7 @@ const Reports = () => {
 
                         {/* Best Clients */}
                         {activeTab === 'clients' && (
-                            <div>
+                            <div className="animate-fade-in">
                                 <h3 style={{ fontSize: '1.25rem', marginBottom: '24px' }}>Clientes Top Compradores</h3>
                                 <div style={{ overflowX: 'auto', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -540,7 +540,7 @@ const Reports = () => {
 
                         {/* Financial */}
                         {activeTab === 'financial' && (
-                            <div>
+                            <div className="animate-fade-in">
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '40px' }}>
                                     <StatCard
                                         title="Faturamento Bruto"
@@ -575,7 +575,7 @@ const Reports = () => {
 
                         {/* Expenses */}
                         {activeTab === 'expenses' && (
-                            <div>
+                            <div className="animate-fade-in">
                                 <h3 style={{ fontSize: '1.25rem', marginBottom: '24px' }}>Detalhamento de Despesas</h3>
                                 <div style={{ overflowX: 'auto', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -614,7 +614,7 @@ const Reports = () => {
 
                         {/* Client List */}
                         {activeTab === 'client_list' && (
-                            <div>
+                            <div className="animate-fade-in">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
                                     <h3 style={{ fontSize: '1.25rem' }}>Lista Completa de Clientes</h3>
                                     <span style={{
